@@ -259,8 +259,11 @@ GLOBAL_DATUM_INIT(crewmonitor, /datum/crewmonitor, new)
 		if (id_card)
 			entry["name"] = id_card.registered_name
 			// OCULIS EDIT ADDITION START
-			var/datum/job/gotten_job = SSjob.get_job(id_card.assignment)
-			entry["icon"] = gotten_job ? gotten_job?.tgui_icon : "question"
+			var/datum/id_trim/card_trim = id_card.trim
+			if (card_trim && card_trim.find_job())
+				entry["icon"] = card_trim.find_job().tgui_icon
+			else
+				entry["icon"] = "question"
 			// OCULIS EDIT ADDITION END
 			entry["assignment"] = id_card.assignment
 			var/trim_assignment = id_card.get_trim_assignment()
