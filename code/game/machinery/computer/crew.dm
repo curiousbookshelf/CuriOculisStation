@@ -259,11 +259,8 @@ GLOBAL_DATUM_INIT(crewmonitor, /datum/crewmonitor, new)
 		if (id_card)
 			entry["name"] = id_card.registered_name
 			// OCULIS EDIT ADDITION START
-			var/datum/id_trim/card_trim = id_card.trim
-			if (card_trim && card_trim.find_job())
-				entry["icon"] = card_trim.find_job().tgui_icon
-			else
-				entry["icon"] = "question"
+			var/datum/job/id_job = id_card?.trim?.find_job()
+			entry["icon"] = id_job?.tgui_icon || "question"
 			// OCULIS EDIT ADDITION END
 			entry["assignment"] = id_card.assignment
 			var/trim_assignment = id_card.get_trim_assignment()
